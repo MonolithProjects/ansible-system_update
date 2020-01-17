@@ -1,0 +1,8 @@
+---
+- name: Update EnterpriseLinux like systems
+  include_tasks: "update_el.yml"
+  when: ansible_pkg_mgr == "yum" or ansible_pkg_mgr == "dnf"
+
+- name: Update Debian like systems
+  include_tasks: "update_deb.yml"
+  when: ansible_pkg_mgr == "apt"

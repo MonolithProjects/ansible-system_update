@@ -1,0 +1,10 @@
+---
+# Autoremove unused dependency packages for all modules.
+autoremove_pkgs: False
+
+# Specifies a distro release from which all packages will be installed.
+# By default it's the current major nad the latest minor version.
+deb_release_ver:
+el6_release_ver:
+el7_release_ver:
+el8_release_ver:

@@ -1,0 +1,12 @@
+---
+- name: Update Debian like system
+  apt:
+    update_cache: True
+    autoclean: True
+    default_release: "{{ deb_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
+    autoremove: "{{ autoremove_pkgs }}"
+  when:
+    - ansible_pkg_mgr == "apt"
+  register: update_all_software_apt
+  until: update_all_software_apt is succeeded
+  retries: 3

@@ -1,0 +1,43 @@
+---
+- name: Update EL6 like system to release version "{{ el6_release_ver }}"
+  yum:
+    name: '*'
+    state: latest
+    disable_gpg_check: yes
+    releasever: "{{ el6_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
+    autoremove: "{{ autoremove_pkgs }}"
+  when:
+    - ansible_pkg_mgr == "yum"
+    - ansible_distribution_major_version == "6"
+  register: update_result_yum_6
+  retries: 3
+  until: update_result_yum_6 is succeeded
+
+- name: Update EL7 like system to release version "{{ el7_release_ver }}"
+  yum:
+    name: '*'
+    state: latest
+    disable_gpg_check: yes
+    releasever: "{{ el7_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
+    autoremove: "{{ autoremove_pkgs }}"
+  when:
+    - ansible_pkg_mgr == "yum"
+    - ansible_distribution_major_version == "7"
+  register: update_result_yum_7
+  retries: 3
+  until: update_result_yum_7 is succeeded
+
+- name: Update EL8 like system to release version "{{ el8_release_ver }}"
+  dnf:
+    name: '*'
+    state: latest
+    update_cache: yes
+    disable_gpg_check: yes
+    releasever: "{{ el8_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
+    autoremove: "{{ autoremove_pkgs }}"
+  when:
+    - ansible_pkg_mgr == "dnf"
+    - ansible_distribution_major_version == "8"
+  register: update_result_dnf_8
+  retries: 3
+  until: update_result_dnf_8 is succeeded
