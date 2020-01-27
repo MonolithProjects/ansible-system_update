@@ -32,4 +32,4 @@ galaxy_info:
     - packages
     - update
     - reboot
-    - smart_reboot
+    - smartreboot
