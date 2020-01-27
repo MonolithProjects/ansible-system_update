@@ -9,7 +9,7 @@ on:
         - cron: '0 4 * * 0'
 
 jobs:
-    build:
+    test:
         runs-on: ubuntu-latest
         steps:
           - name: checkout
