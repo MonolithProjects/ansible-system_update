@@ -1,7 +1,7 @@
 System update
 =========
 
-<img src="https://img.shields.io/ansible/quality/44861?style=flat&logo=ansible"/> <img src="https://img.shields.io/ansible/role/d/44861"/> <img src="https://img.shields.io/github/v/release/MonolithProjects/ansible-system_update"/>  
+<img src="https://img.shields.io/ansible/quality/46110?style=flat&logo=ansible"/> <img src="https://img.shields.io/ansible/role/d/46110"/> <img src="https://img.shields.io/github/v/release/MonolithProjects/ansible-system_update"/>  
 <a href="https://github.com/MonolithProjects/ansible-system_update/actions"><img src="https://github.com/MonolithProjects/ansible-system_update/workflows/molecule%20test/badge.svg?branch=master"/></a>
 
 This role will update all packages on RHEL/CentOS and Debian/Ubuntu systems.  
