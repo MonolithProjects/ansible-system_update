@@ -14,15 +14,10 @@ galaxy_info:
         - 8
     - name: Debian
       versions:
-        - 7
-        - 8
-        - 9
-        - 10
+        - all
     - name: Ubuntu
       versions:
-        - 14
-        - 16
-        - 18
+        - all
   galaxy_tags:
     - el
     - centos
