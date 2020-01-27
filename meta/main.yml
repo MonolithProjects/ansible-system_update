@@ -12,17 +12,17 @@ galaxy_info:
         - 6
         - 7
         - 8
-    - name: CentOS
-      versions:
-        - 6
-        - 7
-        - 8
     - name: Debian
       versions:
-        - all
+        - 7
+        - 8
+        - 9
+        - 10
     - name: Ubuntu
       versions:
-        - all
+        - 14
+        - 16
+        - 18
   galaxy_tags:
     - el
     - centos
