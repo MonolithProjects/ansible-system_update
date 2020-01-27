@@ -1,12 +1,18 @@
 ---
-- name: Update Debian like system
+- name: Update Debian/Ubuntu system
   apt:
-    update_cache: True
-    autoclean: True
-    default_release: "{{ deb_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
+    name: "*"
+    update_cache: yes
+    autoclean: yes
+    state: latest
+    default_release: "{% if deb_release_ver is defined %}{{ deb_release_ver }}{% else %}{{ ansible_distribution_major_version }}.*{% endif %}"
     autoremove: "{{ autoremove_pkgs }}"
   when:
     - ansible_pkg_mgr == "apt"
-  register: update_all_software_apt
-  until: update_all_software_apt is succeeded
+  register: update_result_apt
+  until: update_result_apt is succeeded
   retries: 3
+
+- name: Smart reboot
+  include_tasks: smart_reboot.yml
+  when: smart_reboot_pkg is defined

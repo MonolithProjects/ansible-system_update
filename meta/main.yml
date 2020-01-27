@@ -2,17 +2,21 @@
 galaxy_info:
   author: Michal Muransky
   role_name: system_update
-  description: Update packages
+  description: Updates system packages for RHEL/CentOS/Debian/Ubuntu. Can reboot the system if critical packages are updated.
   company: MonolithProjects
   license: "license (MIT)"
   min_ansible_version: 2.8
   platforms:
     - name: EL
       versions:
-        - all
-    - name: Fedora
+        - 6
+        - 7
+        - 8
+    - name: CentOS
       versions:
-        - all
+        - 6
+        - 7
+        - 8
     - name: Debian
       versions:
         - all
@@ -20,7 +24,12 @@ galaxy_info:
       versions:
         - all
   galaxy_tags:
+    - el
+    - centos
+    - debian
+    - ubuntu
     - linux
     - packages
     - update
-    - distro
+    - reboot
+    - smart_reboot

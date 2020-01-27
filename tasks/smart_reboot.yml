@@ -1,0 +1,36 @@
+---
+- name: Check updated packages for smart reboot (APT)
+  debug:
+    msg: "Package {{ item }} was updated/installed."
+  changed_when: "item in update_result_apt.stdout"
+  when: ansible_pkg_mgr == "apt" and item in update_result_apt.stdout
+  with_items: "{{ smart_reboot_pkg }}"
+  register: smart_result
+  notify: reboot
+
+- name: Check updated packages for smart reboot (YUM)
+  debug:
+    msg: "Package {{ item }} was updated/installed."
+  changed_when: "item in update_result_yum.results|string"
+  when: ansible_pkg_mgr == "yum" and item in update_result_yum.results|string
+  with_items: "{{ smart_reboot_pkg }}"
+  register: smart_result
+  notify: reboot
+
+- name: Check updated packages for smart reboot (DNF)
+  debug:
+    msg: "Package {{ item }} was updated/installed."
+  changed_when: "item in update_result_dnf.results|string"
+  when: ansible_pkg_mgr == "dnf" and item in update_result_dnf.results|string
+  with_items: "{{ smart_reboot_pkg }}"
+  register: smart_result
+  notify: reboot
+
+- meta: flush_handlers
+
+- name: Check the conectivity
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 300

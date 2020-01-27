@@ -1,5 +1,4 @@
 ---
-# handlers file for ansible-system_update
 - name: reboot
   reboot:
-    reboot_timeout: 5
+    reboot_timeout: 0

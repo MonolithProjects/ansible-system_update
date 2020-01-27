@@ -9,11 +9,19 @@ on:
         - cron: '0 4 * * 0'
 
 jobs:
-    build:
-        runs-on: ${{ matrix.os }}
+    test:
+        runs-on: ubuntu-latest
         strategy:
             matrix:
-                os: [centos, debian, ubuntu]
+              config:
+                - image: monolithprojects/systemd-centos7
+                  tag: latest
+                - image: monolithprojects/systemd-centos8
+                  tag: latest
+                - image: monolithprojects/systemd-ubuntu16
+                  tag: latest
+                - image: monolithprojects/systemd-ubuntu18
+                  tag: latest
         steps:
           - name: checkout
             uses: actions/checkout@v2
@@ -22,5 +30,6 @@ jobs:
           - name: molecule
             uses: robertdebock/molecule-action@1.1.1
             with:
-              image: ${{ matrix.image }}
+              image: ${{ matrix.config.image }}
+              tag: ${{ matrix.config.tag }}
               options: "--parallel all"

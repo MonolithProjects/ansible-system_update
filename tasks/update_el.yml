@@ -1,43 +1,51 @@
 ---
-- name: Update EL6 like system to release version "{{ el6_release_ver }}"
+- name: Update RHEL/CentOS like system (YUM)
   yum:
     name: '*'
     state: latest
     disable_gpg_check: yes
-    releasever: "{{ el6_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
-    autoremove: "{{ autoremove_pkgs }}"
+    releasever: "{{ el6_release_ver | default(ansible_distribution_major_version) }}"
   when:
     - ansible_pkg_mgr == "yum"
-    - ansible_distribution_major_version == "6"
-  register: update_result_yum_6
+    - ansible_distribution_major_version == "6" or ansible_distribution_major_version == "7"
+  register: update_result_yum
   retries: 3
-  until: update_result_yum_6 is succeeded
+  until: update_result_yum is succeeded
 
-- name: Update EL7 like system to release version "{{ el7_release_ver }}"
-  yum:
-    name: '*'
-    state: latest
-    disable_gpg_check: yes
-    releasever: "{{ el7_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
-    autoremove: "{{ autoremove_pkgs }}"
-  when:
-    - ansible_pkg_mgr == "yum"
-    - ansible_distribution_major_version == "7"
-  register: update_result_yum_7
-  retries: 3
-  until: update_result_yum_7 is succeeded
-
-- name: Update EL8 like system to release version "{{ el8_release_ver }}"
+- name: Update RHEL/CentOS like system (DNF)
   dnf:
     name: '*'
     state: latest
     update_cache: yes
     disable_gpg_check: yes
-    releasever: "{{ el8_release_ver | default(ansible_local.ansible_distribution_major_version) }}"
-    autoremove: "{{ autoremove_pkgs }}"
+    releasever: "{{ el8_release_ver | default(ansible_distribution_major_version) }}"
   when:
     - ansible_pkg_mgr == "dnf"
     - ansible_distribution_major_version == "8"
-  register: update_result_dnf_8
+  register: update_result_dnf
   retries: 3
-  until: update_result_dnf_8 is succeeded
+  until: update_result_dnf is succeeded
+
+- name: Autoremove packages (yum)
+  yum:
+    autoremove: yes
+  when:
+    - autoremove_pkgs
+    - ansible_pkg_mgr == "yum"
+  register: removing_pkgs
+  retries: 3
+  until: removing_pkgs is succeeded
+
+- name: Autoremove packages (dnf)
+  dnf:
+    autoremove: yes
+  when:
+    - autoremove_pkgs
+    - ansible_pkg_mgr == "dnf"
+  register: removing_pkgs
+  retries: 3
+  until: removing_pkgs is succeeded
+
+- name: Smart reboot
+  include_tasks: smart_reboot.yml
+  when: smart_reboot_pkg is defined
