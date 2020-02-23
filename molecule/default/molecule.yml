@@ -53,5 +53,7 @@ provisioner:
     defaults:
       stdout_callback: yaml
       bin_ansible_callbacks: true
+verifier:
+  name: ansible
 scenario:
   name: default
