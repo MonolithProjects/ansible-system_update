@@ -5,6 +5,7 @@ System update
 <a href="https://galaxy.ansible.com/monolithprojects/system_update"><img src="https://img.shields.io/ansible/role/d/46110"/></a> 
 <a href="https://galaxy.ansible.com/monolithprojects/system_update"><img src="https://img.shields.io/github/v/release/MonolithProjects/ansible-system_update"/></a> 
 <a href="https://github.com/MonolithProjects/ansible-system_update/actions"><img src="https://github.com/MonolithProjects/ansible-system_update/workflows/molecule%20test/badge.svg?branch=master"/></a>
+<a href="https://galaxy.ansible.com/monolithprojects/system_update"><img src="https://img.shields.io/github/license/MonolithProjects/ansible-system_update"/></a>
 
 This role will update all packages on RHEL/CentOS and Debian/Ubuntu systems.  
 Optionally it can update the packages to specific distro release version (by default it is `latest`).
