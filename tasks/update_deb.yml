@@ -1,14 +1,27 @@
 ---
+- name: Update Debian/Ubuntu system to specific release
+  apt:
+    name: "*"
+    update_cache: yes
+    autoclean: yes
+    state: latest
+    default_release: "{{ deb_release_ver }}"
+    autoremove: "{{ autoremove_pkgs }}"
+  when:
+    - ansible_pkg_mgr == "apt" and deb_release_ver is defined
+  register: update_result_apt
+  until: update_result_apt is succeeded
+  retries: 3
+
 - name: Update Debian/Ubuntu system
   apt:
     name: "*"
     update_cache: yes
     autoclean: yes
     state: latest
-    default_release: "{% if deb_release_ver is defined %}{{ deb_release_ver }}{% else %}{{ ansible_distribution_major_version }}.*{% endif %}"
     autoremove: "{{ autoremove_pkgs }}"
   when:
-    - ansible_pkg_mgr == "apt"
+    - ansible_pkg_mgr == "apt" and deb_release_ver is not defined
   register: update_result_apt
   until: update_result_apt is succeeded
   retries: 3
