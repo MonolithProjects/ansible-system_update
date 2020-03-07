@@ -10,14 +10,14 @@ autoremove_pkgs: no
 # Specifies the Linux distro release from which all packages will be installed.
 # By default the packages will be updated to the latest distro release.
 
-# Debian or Ubuntu release version
+# Debian or Ubuntu release version (example: xenial)
 # deb_release_ver:
 
-# RHEL/CentOS release version
+# RHEL/CentOS release version (example 6.10)
 # el6_release_ver:
 
-# RHEL/CentOS release version
+# RHEL/CentOS release version (exanple: 7.6.1810)
 # el7_release_ver:
 
-# RHEL/CentOS release version
+# RHEL/CentOS release version (example: 8.1.1911)
 # el8_release_ver:
