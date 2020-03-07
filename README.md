@@ -12,13 +12,16 @@ Another feature is the `smart reboot` where system will be rebooted after the pa
 
 Requirements
 ------------
+
 System must have access to the packages repository (Internet, Red Hat Satellite, etc.).
 
 
 Role Variables
 --------------
+
 This is a copy from `defaults/main.yml`
-```
+
+```yaml
 # Autoremove unused dependency packages for all modules.
 autoremove_pkgs: no
 
@@ -30,23 +33,25 @@ autoremove_pkgs: no
 # Specifies the Linux distro release from which all packages will be installed.
 # By default the packages will be updated to the latest distro release.
 
-# Debian or Ubuntu release version
+# Debian or Ubuntu release version (example: xenial)
 # deb_release_ver:
 
-# RHEL/CentOS release version
+# RHEL/CentOS release version (example 6.10)
 # el6_release_ver:
 
-# RHEL/CentOS release version
+# RHEL/CentOS release version (exanple: 7.6.1810)
 # el7_release_ver:
 
-# RHEL/CentOS release version
+# RHEL/CentOS release version (example: 8.1.1911)
 # el8_release_ver:
 ```
 
 Example Playbook
 ----------------
+
 Simple example. All packages will be updated to the latest version.
-```
+
+```yaml
 ---
 - name: Example
   hosts: all
@@ -59,7 +64,7 @@ In this example `el7` system (RHEL7 or CentOS7) packages will be updated to the 
 Using `autoremove_pkgs` the dependencies which are no longer needed will be autoremoved. 
 System will be rebooted if `kernel` or `dbus` package is updated.  
 
-```
+```yaml
 ---
 - name: Example
   hosts: all
